@@ -5,11 +5,11 @@ if path.dirname(path.abspath("./giada-speech-synthesis")) not in sys.path:
     sys.path.append(path.dirname(path.abspath("./giada-speech-synthesis")))
     system("cls")
 
-from resources import commands, constants
+from resources import *
 
 def main() -> None:
     system("cls")
-    user = input("What action would you like to execute?\n1. Add typos to your typo file\n2. View your typo file\n3. Clear your typo file\n4. Exit the program\n-> ")
+    user = input("What action would you like to execute?\n1. Add typos to your typo file\n2. View your typo file\n3. Clear your typo file\n4. Correct your text\n5. Exit the program\n-> ")
     if user == "1":
         commands.add(location)
         main()
@@ -20,6 +20,9 @@ def main() -> None:
         commands.clear(location)
         main()
     elif user == "4":
+        commands.correct()
+        main()
+    elif user == "5":
         system("cls")
     else:
         system("cls")

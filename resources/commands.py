@@ -1,4 +1,8 @@
 from pathlib import Path
+from resources import constants
+import nltk
+from nltk.corpus import words
+
 
 
 def fileFinder() -> str:
@@ -16,7 +20,6 @@ def convertFileToPath(file:str) -> str:
 
 
 def add(file:str) -> None:
-    print("\n")
     file = convertFileToPath(file)
     with open(file, "a") as appender:
         changes = input("What changes would you like to make to the file? ").split("~")
@@ -25,18 +28,14 @@ def add(file:str) -> None:
                 pass
             else:
                 appender.write(f"\n{i}")
-    print("\n")
 
 
 def clear(file:str) -> None:
-    print("\n")
     file = convertFileToPath(file)
     open(file, "w").close()
-    print("\n")
 
 
 def view(file:str) -> None:
-    print("\n")
     file = convertFileToPath(file)
     with open(file, "r") as reader:
         tmp = []
@@ -48,12 +47,36 @@ def view(file:str) -> None:
     print("\n")
 
 
-#def engaged() -> bool:
-#    print("\n")
-#    user = input("Do you require another operation? ")
-#    print("\n")
-#
-#    if user.lower() == "yes" or user.lower() == "y":
-#        return True
-#    else:
-#        return False
+def correct() -> None:
+    en_dictionary = set(words.words())
+    text = input("What text would you like to be corrected? ")
+    combos = []
+    candidates = []
+    differences = []
+    combined = []
+    sorted_candidates = []
+    for i in text.lower():
+        combos.append(constants.keyboard_dict2[i])
+    for i in generateCombosFromList(combos):
+        if "".join(i).lower() in en_dictionary:
+            candidates.append("".join(i))
+        else:
+            pass
+    for candidate in candidates:
+        differences.append(sum(1 for a, b in zip(candidate, [x for x in text]) if a != b))
+
+    combined = [list(item) for item in zip(candidates, differences)]
+    sorted_candidates = sorted([list(item) for item in zip(candidates, differences)], key=lambda i: i[1])
+    print(sorted_candidates)
+    input()
+
+def generateCombosFromList(lists):
+    if not lists:
+        return [[]]
+    first_list = lists[0]
+    rest_lists = lists[1:]
+    combinations = []
+    for item in first_list:
+        for combination in generateCombosFromList(rest_lists):
+            combinations.append([item] + combination)
+    return combinations
