@@ -9,20 +9,25 @@ from resources import *
 
 def main() -> None:
     system("cls")
-    user = input("What action would you like to execute?\n1. Add elements to your text file\n2. View your text file\n3. Clear your text file\n4. Correct a word\n5. Exit the program\n-> ")
+    user = input("What action would you like to execute?\n1. Add elements to your text file\n2. View your text file\n3. Clear your text file\n4. Delete your text file\n5. Correct a word\n6. Make a dictionary file\n7. Exit the program\n-> ")
     if user == "1":
-        commands.add(location)
+        commands.add()
         main()
     elif user == "2":
-        commands.view(location)
+        commands.view()
         main()
     elif user == "3":
-        commands.clear(location)
+        commands.clear()
         main()
     elif user == "4":
-        commands.correct()
+        commands.delete()
         main()
     elif user == "5":
+        commands.correct()
+    elif user == "6":
+        commands.makeDictionary()
+        main()
+    elif user == "7":
         system("cls")
     else:
         system("cls")
@@ -31,5 +36,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    location = commands.fileFinder()
     main()
