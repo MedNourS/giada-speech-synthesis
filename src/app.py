@@ -9,7 +9,7 @@ from resources import *
 
 def main() -> None:
     system("cls")
-    user = input("What action would you like to execute?\n1. Add typos to your typo file\n2. View your typo file\n3. Clear your typo file\n4. Correct your text\n5. Exit the program\n-> ")
+    user = input("What action would you like to execute?\n1. Add elements to your text file\n2. View your text file\n3. Clear your text file\n4. Correct a word\n5. Exit the program\n-> ")
     if user == "1":
         commands.add(location)
         main()
